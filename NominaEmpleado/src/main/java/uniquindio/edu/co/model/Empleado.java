@@ -74,4 +74,7 @@ public abstract class Empleado {
     public void setDescuentoPension(float descuentoPension) {
         this.descuentoPension = descuentoPension;
     }
+
+
+
 }

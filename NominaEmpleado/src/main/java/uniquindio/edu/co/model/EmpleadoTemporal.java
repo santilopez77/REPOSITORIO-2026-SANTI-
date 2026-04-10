@@ -25,5 +25,13 @@ public class EmpleadoTemporal extends  Empleado {
     public void setValorDia(float valorDia) {
         this.valorDia = valorDia;
     }
+
+    @Override
+    public String toString() {
+        return "EmpleadoTemporal{" +
+                "diasTrabajados=" + diasTrabajados +
+                ", valorDia=" + valorDia +
+                '}';
+    }
 }
 

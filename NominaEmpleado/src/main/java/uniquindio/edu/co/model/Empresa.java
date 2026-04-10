@@ -14,6 +14,18 @@ public class Empresa {
         this.nombre = nombre;
         this.listEmpleados = new ArrayList<>();
     }
+
+    /**
+     * Crea un nuevo empleado y lo agrega a la lista de empleado.
+     * @param nombre del empleado
+     * @param documento del empleado
+     * @param edad del empleado
+     * @param salarioBase del empleado
+     * @param descuentoSalud del empleado
+     * @param descuentoPension del empleado
+     * @param resumenPagolist del empleado
+     * @return
+     */
     public String crearEmpleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, List<ResumenPago> resumenPagolist){
         String respuesta = "";
         if(buscarEmpleado(documento)){
@@ -21,11 +33,16 @@ public class Empresa {
         }else{
             Empleado empleadoNuevo = new Empleado(nombre,documento, edad , salarioBase, descuentoSalud,descuentoPension,resumenPagolist) {
             };
-            listClientes.add(clienteNuevo);
-            respuesta = "El cliente " + clienteNuevo.getNombre() + " se registro exitosamente";
+            listEmpleados.add(empleadoNuevo);
+            respuesta = "El cliente " +empleadoNuevo .getNombre() + " se registro exitosamente";
         }
         return respuesta;
     }
+
+
+
+
+
 
 
 }

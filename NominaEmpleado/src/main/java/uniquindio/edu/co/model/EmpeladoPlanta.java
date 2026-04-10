@@ -46,4 +46,14 @@ public class EmpeladoPlanta  extends Empleado{
     public void setAuxilioTransporte(float auxilioTransporte) {
         this.auxilioTransporte = auxilioTransporte;
     }
+
+    @Override
+    public String toString() {
+        return "EmpeladoPlanta{" +
+                "cargo='" + cargo + '\'' +
+                ", horasExtra=" + horasExtra +
+                ", valorHoraExtra=" + valorHoraExtra +
+                ", auxilioTransporte=" + auxilioTransporte +
+                '}';
+    }
 }

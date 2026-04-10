@@ -25,4 +25,12 @@ public class EmpleadoVenta  extends Empleado{
     public void setPorcentajeComision(float porcentajeComision) {
         this.porcentajeComision = porcentajeComision;
     }
+
+    @Override
+    public String toString() {
+        return "EmpleadoVenta{" +
+                "totalVentas=" + totalVentas +
+                ", porcentajeComision=" + porcentajeComision +
+                '}';
+    }
 }
