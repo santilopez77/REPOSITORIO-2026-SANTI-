@@ -1,5 +1,7 @@
 package uniquindio.edu.co.model;
 
+import java.util.List;
+
 public abstract class Empleado {
 
     private String nombre;
@@ -9,10 +11,10 @@ public abstract class Empleado {
     private float descuentoSalud;
     private float descuentoPension;
 
-    private  list <ResumenPago> resumenPagolist;
+    private  List  <ResumenPago> resumenPagolist;
 
 
-    public Empleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, list<ResumenPago> resumenPagolist) {
+    public Empleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, List<ResumenPago> resumenPagolist) {
         this.nombre = nombre;
         this.documento = documento;
         this.edad = edad;
@@ -21,6 +23,9 @@ public abstract class Empleado {
         this.descuentoPension = descuentoPension;
         this.resumenPagolist = resumenPagolist;
     }
+
+
+
 
     public String getNombre() {
         return nombre;
