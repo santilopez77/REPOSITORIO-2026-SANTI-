@@ -1,4 +1,6 @@
 package uniquindio.edu.co;
+import uniquindio.edu.co.model.EmpleadoTemporal;
+
 import java.util.Scanner;
 /**
  * Clase principal del sistema de nómina de empleados.

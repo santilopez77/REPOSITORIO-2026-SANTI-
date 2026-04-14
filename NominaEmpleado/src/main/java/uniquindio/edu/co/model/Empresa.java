@@ -32,6 +32,15 @@ public class Empresa {
             respuesta = "El cliente ya existe con el mismo numero de cedula";
         }else{
             Empleado empleadoNuevo = new Empleado(nombre,documento, edad , salarioBase, descuentoSalud,descuentoPension,resumenPagolist) {
+                @Override
+                public float calcularSalarioBruto() {
+                    return 0;
+                }
+
+                @Override
+                public String getTipoEmpleado() {
+                    return "";
+                }
             };
             listEmpleados.add(empleadoNuevo);
             respuesta = "El cliente " +empleadoNuevo .getNombre() + " se registro exitosamente";

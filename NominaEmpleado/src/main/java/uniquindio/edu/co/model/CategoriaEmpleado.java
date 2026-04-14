@@ -14,7 +14,7 @@ public enum CategoriaEmpleado {
         this.descripcion = descripcion;
     }
 
-    public float getPorcentajeBonificacion() {
+    public static float getPorcentajeBonificacion() {
         return porcentajeBonificacion;
     }
 

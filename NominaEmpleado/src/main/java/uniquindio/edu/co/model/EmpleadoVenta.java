@@ -8,6 +8,15 @@ public class EmpleadoVenta  extends Empleado {
 
     public EmpleadoVenta(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, List<ResumenPago> listResumenPago, float porcentajeComision, float totalVentas) {
         super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoriaEmpleado, listResumenPago);
+
+        if (totalVentas < 0) {
+            throw new IllegalArgumentException("Ventas no pueden ser negativas");
+        }
+
+        if (porcentajeComision < 0 || porcentajeComision > 100) {
+            throw new IllegalArgumentException("Porcentaje de comisión inválido (0-100)");
+        }
+
         this.porcentajeComision = porcentajeComision;
         this.totalVentas = totalVentas;
     }
