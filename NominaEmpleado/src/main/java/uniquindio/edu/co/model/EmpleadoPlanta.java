@@ -1,13 +1,13 @@
 package uniquindio.edu.co.model;
 
-public class EmpeladoPlanta  extends Empleado{
+public class EmpleadoPlanta extends Empleado{
 
     private String cargo;
     private int horasExtra;
     private float valorHoraExtra;
     private float auxilioTransporte;
 
-    public EmpeladoPlanta(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, list<ResumenPago> resumenPagolist, String cargo, int horasExtra, float valorHoraExtra, float auxilioTransporte) {
+    public EmpleadoPlanta(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, list<ResumenPago> resumenPagolist, String cargo, int horasExtra, float valorHoraExtra, float auxilioTransporte) {
         super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, resumenPagolist);
         this.cargo = cargo;
         this.horasExtra = horasExtra;
@@ -49,7 +49,7 @@ public class EmpeladoPlanta  extends Empleado{
 
     @Override
     public String toString() {
-        return "EmpeladoPlanta{" +
+        return "EmpleadoPlanta{" +
                 "cargo='" + cargo + '\'' +
                 ", horasExtra=" + horasExtra +
                 ", valorHoraExtra=" + valorHoraExtra +
