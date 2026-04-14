@@ -27,22 +27,14 @@ public abstract class Empleado {
         this.listResumenPago = listResumenPago;
     }
 
-    public Empleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, List<ResumenPago> listResumenPago) {
-        this.nombre = nombre;
-        this.documento = documento;
-        this.edad = edad;
-        this.salarioBase = salarioBase;
-        this.descuentoSalud = descuentoSalud;
-        this.descuentoPension = descuentoPension;
-        this.listResumenPago =new ArrayList<>();
-    }
+
 
     public abstract float calcularSalarioBruto();
 
     public abstract String getTipoEmpleado();
 
     public float calcularBonifiacionCategoria(){
-        return salarioBase*CategoriaEmpleado.getporcentajeBonificacion();
+        return salarioBase*CategoriaEmpleado.getPorcentajeBonificacion();
     }
 
     public float calcularDescuento (){
