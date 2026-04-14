@@ -4,7 +4,7 @@ public class EmpleadoTemporal extends  Empleado {
     private int diasTrabajados;
     private float valorDia;
 
-    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, list<ResumenPago> ListResumenPago, int diasTrabajados, float valorDia) {
+    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, int diasTrabajados, float valorDia) {
         super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoriaEmpleado,ListResumenPago);
 
         if (diasTrabajados < 0) {

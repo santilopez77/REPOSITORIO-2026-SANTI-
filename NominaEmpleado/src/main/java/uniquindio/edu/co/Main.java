@@ -1,5 +1,8 @@
 package uniquindio.edu.co;
+import uniquindio.edu.co.model.CategoriaEmpleado;
+import uniquindio.edu.co.model.Empleado;
 import uniquindio.edu.co.model.EmpleadoTemporal;
+import uniquindio.edu.co.model.EmpleadoVenta;
 
 import java.util.Scanner;
 /**
@@ -74,15 +77,14 @@ public class Main {
             int edad = leerEntero("Edad: ");
             float salarioBase = leerFloat("Salario base: ");
             CategoriaEmpleado categoria = leerCategoria();
-            float descSalud = leerFloat("Descuento salud (%): ");
-            float descPension = leerFloat("Descuento pensión (%): ");
+            float descuentoSalud = leerFloat("Descuento salud (%): ");
+            float descuentoPension = leerFloat("Descuento pensión (%): ");
             String cargo = leerTexto("Cargo: ");
             int horasExtra = leerEntero("Horas extra: ");
             float valorHoraExtra = leerFloat("Valor hora extra: ");
             float auxilioTransporte = leerFloat("Auxilio de transporte: ");
 
-            EmpleadoPlanta emp = new EmpleadoPlanta(nombre, documento, edad, salarioBase,
-                    categoria, descSalud, descPension, cargo, horasExtra, valorHoraExtra, auxilioTransporte);
+            EmpleadoPlanta emp = new EmpleadoPlanta(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension,categoria,ListResumenPago, cargo, horasExtra, valorHoraExtra, auxilioTransporte);
             empresa.agregarEmpleado(emp);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -99,13 +101,12 @@ public class Main {
             int edad = leerEntero("Edad: ");
             float salarioBase = leerFloat("Salario base: ");
             CategoriaEmpleado categoria = leerCategoria();
-            float descSalud = leerFloat("Descuento salud (%): ");
-            float descPension = leerFloat("Descuento pensión (%): ");
+            float descuentoSalud = leerFloat("Descuento salud (%): ");
+            float descuentoPension = leerFloat("Descuento pensión (%): ");
             float totalVentas = leerFloat("Total ventas del mes: ");
             float porcentajeComision = leerFloat("Porcentaje de comisión (%): ");
 
-            EmpleadoVentas emp = new EmpleadoVentas(nombre, documento, edad, salarioBase,
-                    categoria, descSalud, descPension, totalVentas, porcentajeComision);
+            EmpleadoVenta emp = new EmpleadoVenta(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoria, listResumenPago, totalVentas, porcentajeComision);
             empresa.agregarEmpleado(emp);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -120,13 +121,12 @@ public class Main {
             int edad = leerEntero("Edad: ");
             float salarioBase = leerFloat("Salario base (referencia): ");
             CategoriaEmpleado categoria = leerCategoria();
-            float descSalud = leerFloat("Descuento salud (%): ");
-            float descPension = leerFloat("Descuento pensión (%): ");
+            float descuentoSalud = leerFloat("Descuento salud (%): ");
+            float descuentoPension = leerFloat("Descuento pensión (%): ");
             int diasTrabajados = leerEntero("Días trabajados: ");
             float valorDia = leerFloat("Valor por día: ");
 
-            EmpleadoTemporal emp = new EmpleadoTemporal(nombre, documento, edad, salarioBase,
-                    categoria, descSalud, descPension, diasTrabajados, valorDia);
+            EmpleadoTemporal emp = new EmpleadoTemporal(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoria, ListResumenPago, diasTrabajados, valorDia);
             empresa.agregarEmpleado(emp);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
