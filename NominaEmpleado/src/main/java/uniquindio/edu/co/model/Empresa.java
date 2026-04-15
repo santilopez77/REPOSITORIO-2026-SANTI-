@@ -24,7 +24,7 @@ public class Empresa {
      * @param descuentoSalud del empleado
      * @param descuentoPension del empleado
      * @param resumenPagolist del empleado
-     * @return
+     * @return respuesta
      */
     public String crearEmpleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, List<ResumenPago> resumenPagolist){
         String respuesta = "";
