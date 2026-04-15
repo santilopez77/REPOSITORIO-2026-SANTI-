@@ -6,34 +6,19 @@ public class EmpleadoTemporal extends  Empleado {
     private int diasTrabajados;
     private float valorDia;
 
-    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, List<ResumenPago> listResumenPago, int diasTrabajados, float valorDia) {
-        super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoriaEmpleado, listResumenPago);
+    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, List<ResumenPago> ListResumenPago, int diasTrabajados, float valorDia) {
+        super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoriaEmpleado,ListResumenPago);
+
+        if (diasTrabajados < 0) {
+            throw new IllegalArgumentException("Días trabajados no pueden ser negativos");
+        }
+        if (valorDia < 0) {
+            throw new IllegalArgumentException("Valor por día inválido");
+        }
+
         this.diasTrabajados = diasTrabajados;
         this.valorDia = valorDia;
     }
-
-   public float  calcularPagoDias(){
-        return diasTrabajados*valorDia;
-   }
-
-    @Override
-    public float calcularSalarioBruto() {
-        return 0;
-    }
-    @Override
-    public String getTipoEmpleado() {
-        return "Empleado Temporal";
-    }
-
-    @Override
-    public void mostrarInformacion() {
-        super.mostrarInformacion();
-        System.out.printf("  [Temporal] Días trabajados: %d | Valor/día: $%.2f | Pago días: $%.2f%n%n",
-                diasTrabajados, valorDia, calcularPagoDias());
-    }
-
-
-
 
     public int getDiasTrabajados() {
         return diasTrabajados;
@@ -57,6 +42,16 @@ public class EmpleadoTemporal extends  Empleado {
                 "diasTrabajados=" + diasTrabajados +
                 ", valorDia=" + valorDia +
                 '}';
+    }
+
+    @Override
+    public float calcularSalarioBruto() {
+        return 0;
+    }
+
+    @Override
+    public String getTipoEmpleado() {
+        return "";
     }
 }
 
