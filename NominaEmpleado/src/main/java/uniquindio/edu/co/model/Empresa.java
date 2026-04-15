@@ -1,57 +1,83 @@
 package uniquindio.edu.co.model;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Empresa {
 
     private String nombre;
+    private String nit;
+    private String correo;
+    private String direccion;
     private List<Empleado> listEmpleados;
 
 
-    public Empresa(String nombre, List<Empleado> listEmpleados) {
+    public Empresa(String nombre, String nit, String correo, String direccion, List<Empleado> listEmpleados) {
         this.nombre = nombre;
+        this.nit = nit;
+        this.correo = correo;
+        this.direccion = direccion;
         this.listEmpleados = new ArrayList<>();
     }
 
-    /**
-     * Crea un nuevo empleado y lo agrega a la lista de empleado.
-     * @param nombre del empleado
-     * @param documento del empleado
-     * @param edad del empleado
-     * @param salarioBase del empleado
-     * @param descuentoSalud del empleado
-     * @param descuentoPension del empleado
-     * @param resumenPagolist del empleado
-     * @return
-     */
-    public String crearEmpleado(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, List<ResumenPago> resumenPagolist){
-        String respuesta = "";
-        if(buscarEmpleado(documento)){
-            respuesta = "El cliente ya existe con el mismo numero de cedula";
-        }else{
-            Empleado empleadoNuevo = new Empleado(nombre,documento, edad , salarioBase, descuentoSalud,descuentoPension,resumenPagolist) {
-                @Override
-                public float calcularSalarioBruto() {
-                    return 0;
-                }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-                @Override
-                public String getTipoEmpleado() {
-                    return "";
-                }
-            };
-            listEmpleados.add(empleadoNuevo);
-            respuesta = "El cliente " +empleadoNuevo .getNombre() + " se registro exitosamente";
-        }
-        return respuesta;
+    public String getNit() {
+        return nit;
+    }
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<Empleado> getListEmpleados() {
+        return listEmpleados;
+    }
+    public void setListEmpleados(List<Empleado> listEmpleados) {
+        this.listEmpleados = listEmpleados;
     }
 
 
+    public void agregarEmpleado() {
 
+    }
 
+    public Empleado buscarPorDocumento(String doc) {
 
+        return null;
+    }
 
+    public void mostrarTodosLosEmpleados() {
 
+    }
+
+    public void mostrarEmpleadoMayorSalario() {
+
+    }
+
+    public void calcularNominaTotal() {
+
+    }
+
+    public void mostrarResumenesDePago() {
+
+    }
 }

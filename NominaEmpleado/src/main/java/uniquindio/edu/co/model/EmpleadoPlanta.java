@@ -15,11 +15,9 @@ public class EmpleadoPlanta extends Empleado {
         if (horasExtras < 0) {
             throw new IllegalArgumentException("Horas extra no pueden ser negativas");
         }
-
         if (valorHoraExtra < 0) {
             throw new IllegalArgumentException("Valor de hora extra inválido");
         }
-
         if (auxilioTransporte < 0) {
             throw new IllegalArgumentException("Auxilio de transporte inválido");
         }
@@ -30,36 +28,13 @@ public class EmpleadoPlanta extends Empleado {
         this.auxilioTransporte = auxilioTransporte;
     }
 
-
-
     @Override
     public float calcularSalarioBruto() {
-        return  getSalarioBase()
-                +calcularBonifiacionCategoria()
-                +(horasExtras + valorHoraExtra)
-                +auxilioTransporte;
+        return 0;
     }
 
     @Override
     public String getTipoEmpleado() {
         return "";
     }
-}
-
-@Override
-public String getTipoEmpleado() {
-    return "Empleado de Planta";
-}
-
-@Override
-public void mostrarInformacion() {
-    super.mostrarInformacion();
-    // Detalle adicional de planta
-    System.out.printf("  [Planta] Cargo: %s | Horas extra: %d | Valor h/e: $%.2f | Auxilio transp.: $%.2f%n%n",
-            cargo, horasExtras, valorHoraExtra, auxilioTransporte);
-}
-
-
-
-
 }

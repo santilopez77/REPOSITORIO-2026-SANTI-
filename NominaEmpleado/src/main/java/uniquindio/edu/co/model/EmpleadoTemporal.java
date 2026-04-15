@@ -1,16 +1,17 @@
 package uniquindio.edu.co.model;
 
+import java.util.List;
+
 public class EmpleadoTemporal extends  Empleado {
     private int diasTrabajados;
     private float valorDia;
 
-    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, int diasTrabajados, float valorDia) {
+    public EmpleadoTemporal(String nombre, String documento, int edad, float salarioBase, float descuentoSalud, float descuentoPension, CategoriaEmpleado categoriaEmpleado, List<ResumenPago> ListResumenPago, int diasTrabajados, float valorDia) {
         super(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoriaEmpleado,ListResumenPago);
 
         if (diasTrabajados < 0) {
             throw new IllegalArgumentException("Días trabajados no pueden ser negativos");
         }
-
         if (valorDia < 0) {
             throw new IllegalArgumentException("Valor por día inválido");
         }

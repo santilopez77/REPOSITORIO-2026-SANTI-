@@ -1,9 +1,7 @@
 package uniquindio.edu.co;
-import uniquindio.edu.co.model.CategoriaEmpleado;
-import uniquindio.edu.co.model.Empleado;
-import uniquindio.edu.co.model.EmpleadoTemporal;
-import uniquindio.edu.co.model.EmpleadoVenta;
+import uniquindio.edu.co.model.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * Clase principal del sistema de nómina de empleados.
@@ -11,7 +9,7 @@ import java.util.Scanner;
  */
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Empresa empresa = new Empresa ("TechCorp S.A.S");
+    private static final Empresa empresa = new Empresa ("TechCorp S.A.S", "112966473-8", "TechCorp@gmail.com", "carrera 19, #14-82", new ArrayList<>());
 
     public static void main(String[] args) {
         int opcion;
@@ -32,7 +30,7 @@ public class Main {
                     empresa.mostrarTodosLosEmpleados();
                     break;
                 case 5:
-                    buscarEmpleado();
+                    buscarEmpleado(documento);
                     break;
                 case 6:
                     empresa.mostrarEmpleadoMayorSalario();
@@ -85,7 +83,7 @@ public class Main {
             float auxilioTransporte = leerFloat("Auxilio de transporte: ");
 
             EmpleadoPlanta emp = new EmpleadoPlanta(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension,categoria,ListResumenPago, cargo, horasExtra, valorHoraExtra, auxilioTransporte);
-            empresa.agregarEmpleado(emp);
+            empresa.agregarEmpleado();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
 
@@ -107,7 +105,7 @@ public class Main {
             float porcentajeComision = leerFloat("Porcentaje de comisión (%): ");
 
             EmpleadoVenta emp = new EmpleadoVenta(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoria, listResumenPago, totalVentas, porcentajeComision);
-            empresa.agregarEmpleado(emp);
+            empresa.agregarEmpleado();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -127,13 +125,13 @@ public class Main {
             float valorDia = leerFloat("Valor por día: ");
 
             EmpleadoTemporal emp = new EmpleadoTemporal(nombre, documento, edad, salarioBase, descuentoSalud, descuentoPension, categoria, ListResumenPago, diasTrabajados, valorDia);
-            empresa.agregarEmpleado(emp);
+            empresa.agregarEmpleado();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    private static void buscarEmpleado() {
+    public static void buscarEmpleado(String documento) {
         String doc = leerTexto("Ingrese el documento a buscar: ");
         Empleado encontrado = empresa.buscarPorDocumento(doc);
         if (encontrado != null) {

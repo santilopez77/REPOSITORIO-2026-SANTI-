@@ -1,6 +1,5 @@
 package uniquindio.edu.co.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Empleado {
@@ -20,11 +19,9 @@ public abstract class Empleado {
         if (salarioBase < 0) {
             throw new IllegalArgumentException("El salario base no puede ser negativo");
         }
-
         if (descuentoSalud < 0 || descuentoSalud > 100) {
             throw new IllegalArgumentException("Descuento de salud inválido (0-100)");
         }
-
         if (descuentoPension < 0 || descuentoPension > 100) {
             throw new IllegalArgumentException("Descuento de pensión inválido (0-100)");
         }
