@@ -24,6 +24,7 @@ public class Parqueadero {
 
     /**
      * Metodo para buscar si un empleado ya existe en el programa
+     *
      * @param id del operario
      * @return
      */
@@ -39,9 +40,10 @@ public class Parqueadero {
     }
 
     /**
-     *Metodo para crear un operario en el programa
+     * Metodo para crear un operario en el programa
+     *
      * @param nombre del operario
-     * @param id del operario
+     * @param id     del operario
      * @return mensaje indicando la operación
      */
     public String crearOperario(String nombre, int id, String telefono, String email, int horasTrabajadas) {
@@ -49,7 +51,7 @@ public class Parqueadero {
         if (buscarEmpleado(id)) {
             respuesta = "El empleado con id " + id + " ya existe en el sistema.";
         } else {
-            Operario nuevoOperario = new Operario(nombre, id, telefono, email,horasTrabajadas);
+            Operario nuevoOperario = new Operario(nombre, id, telefono, email, horasTrabajadas);
             listPersona.add(nuevoOperario);
             respuesta = "El operario " + nuevoOperario.getNombre() + " se registró exitosamente.";
         }
@@ -58,13 +60,14 @@ public class Parqueadero {
 
     /**
      * Metodo para saber si un espacio esta disponible
+     *
      * @param estadoEspacio del espacio
      * @return un booleano con el estado en falso o verdadero
      */
-    public boolean encontrarEspacioDisponible(EstadoEspacio estadoEspacio){
+    public boolean encontrarEspacioDisponible(EstadoEspacio estadoEspacio) {
         boolean encontrado = false;
-        for(Espacio e : listEspacio){
-            if(e.getEstadoEspacio() == EstadoEspacio.DISPONIBLE ){
+        for (Espacio e : listEspacio) {
+            if (e.getEstadoEspacio() == EstadoEspacio.DISPONIBLE) {
                 encontrado = true;
 
             }
@@ -90,32 +93,54 @@ public class Parqueadero {
 
         disponibles = total - ocupados;
         return
-                "El Total de espacios es: " + total + "Los ocupados son: " + ocupados +  "y los espacios disponibles: " + disponibles;
+                "El Total de espacios es: " + total + "Los ocupados son: " + ocupados + "y los espacios disponibles: " + disponibles;
     }
+
 
     /**
      * Metodo para registrar el ingreso de los vehiculos al parqueadero
-     * @param placa del vehiculo
+
+     * @param placa           del vehiculo
      * @param nombreConductor del vehiculo
-     * @param idConductor del vehiculo
-     * @param horaIngreso del vehiculo
+     * @param idConductor     del vehiculo
+     * @param horaIngreso     del vehiculo
      * @param espacioAsignado del vehiculo
      * @return mensaje indicando operación
      */
-     public String registrarIngresoVehiculos(String placa, String nombreConductor, int idConductor,
-                                             double horaIngreso, String espacioAsignado) {
-         String respuesta = "";
-         if (encontrarEspacioDisponible(EstadoEspacio.DISPONIBLE)) {
-             respuesta = "El vehiculo no puede ingresar ya que el espacio esta ocupado por otro vehiculo";
-         } else{
-             //Falta como agregar el tipo de vehiculo
-             Vehiculo newVehiculo = new Vehiculo(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado) ;
-             respuesta ="El vehiculo ha ingresado exitosamente ";
-         }
+    public String registrarIngresoVehiculos(String placa, String nombreConductor, int idConductor,
+                                            double horaIngreso, String espacioAsignado) {
+        String respuesta = "";
+        if (encontrarEspacioDisponible(EstadoEspacio.DISPONIBLE)) {
+            respuesta = "El vehiculo no puede ingresar ya que el espacio esta ocupado por otro vehiculo";
+        } else {
+            //Falta como agregar el tipo de vehiculo
+            Vehiculo newVehiculo = new Vehiculo(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);
+            respuesta = "El vehiculo ha ingresado exitosamente ";
+        }
         return respuesta;
-     }
+    }
 
+    /**
+     * Metodo para consultar cuantos vehiculos hay dentro del parqueadero
+     * @return mensaje indicando operación
+     */
 
+    public String vehiculosDentroParqueadero(String placa) {
+        String respuesta = "";
+        for (Vehiculo vehiculo : listVehiculo) {
+            if (vehiculo.getPlaca().equals(placa)) {
+            }
+            if (vehiculo.getEstadoVehiculo() == EstadoVehiculo.ADENTRO) {
+                respuesta = "Placa: " + vehiculo.getPlaca() + "Conductor: " + vehiculo.getNombreConductor() + "Hora ingreso: "
+                        + vehiculo.getHoraIngreso() + "Espacio asignado " + vehiculo.getEspacioAsignado();
+
+            } else {
+                respuesta = "El vehiculo no esta estacionado en ningun espacio";
+            }
+
+        }
+        return respuesta;
+    }
 
 
     public String getNombre() {

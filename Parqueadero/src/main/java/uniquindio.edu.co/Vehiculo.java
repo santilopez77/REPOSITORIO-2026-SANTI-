@@ -27,6 +27,7 @@ public class Vehiculo implements TarifaEspacio {
     }
 
 
+
     // Getters y Setters
     public String getPlaca() {
         return placa;
