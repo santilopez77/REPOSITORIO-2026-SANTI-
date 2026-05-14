@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1c495bb6-97a4-4236-94a5-6d6652ff3840" name="Changes" comment="Creacion de algunos metodos en la clase parqueadero">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Administrador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Espacio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/EstadoEspacio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/EstadoVehiculo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/NivelCargo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Operario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Persona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Registro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TipoEspacio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TipoUsuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/app.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/REPOSITORIO-2026-SANTI-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/REPOSITORIO-2026-SANTI-.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/src/main/java/uniquindio/edu/co/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/src/main/java/uniquindio/edu/co/model/Contacto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agenda/src/main/java/uniquindio/edu/co/model/Reunion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/CategoriaEmpleado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/Empleado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/EmpleadoPlanta.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/EmpleadoTemporal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/EmpleadoVenta.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/Empresa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NominaEmpleado/src/main/java/uniquindio/edu/co/model/ResumenPago.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio/edu/co/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio/edu/co/model/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/test/java/uniquindio/edu/co/model/PersonaTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Estebaboso&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/santilopez77/REPOSITORIO-2026-SANTI-.git&quot;,
+    &quot;accountId&quot;: &quot;3b59085a-be79-4127-8480-4338328a0a22&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3DeajV22vnRlUH72rZ32JCFs4vZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev__JuanEsteban",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\juang\IdeaProjects\REPOSITORIO-2026-SANTI-\.idea" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c495bb6-97a4-4236-94a5-6d6652ff3840" name="Changes" comment="" />
+      <created>1778645124658</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778645124658</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creacion de algunos metodos en la clase parqueadero" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creacion de algunos metodos en la clase parqueadero" />
+  </component>
+</project>
