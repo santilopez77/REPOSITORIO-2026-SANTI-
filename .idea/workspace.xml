@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c495bb6-97a4-4236-94a5-6d6652ff3840" name="Changes" comment="Creacion de algunos metodos en la clase parqueadero">
-      <change afterPath="$PROJECT_DIR$/.idea/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agenda/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java" afterDir="false" />
@@ -57,16 +58,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev__JuanEsteban",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\juang\IdeaProjects\REPOSITORIO-2026-SANTI-\.idea" />
@@ -97,6 +98,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de algunos metodos en la clase parqueadero" />

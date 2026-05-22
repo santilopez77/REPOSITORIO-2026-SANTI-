@@ -1,0 +1,932 @@
+Index: Parqueadero/src/main/java/uniquindio.edu.co/Moto.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\npublic class Moto extends Vehiculo{\r\n\r\n    public int cilindraje;\r\n\r\n    public Moto (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,\r\n                  int cilindraje){\r\n        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);\r\n        this.cilindraje = cilindraje;\r\n    }\r\n\r\n    public int getCilindraje() {\r\n        return cilindraje;\r\n    }\r\n\r\n    public void setCilindraje(int cilindraje) {\r\n        this.cilindraje = cilindraje;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java b/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java	(date 1779406744960)
+@@ -2,12 +2,18 @@
+ 
+ public class Moto extends Vehiculo{
+ 
+-    public int cilindraje;
++    private int cilindraje;
++    private double valorHora;
+ 
+-    public Moto (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,
+-                  int cilindraje){
+-        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);
++    public Moto (String placa, String nombreConductor, int idConductor, double horaIngreso,double horaSalida, int cilindraje, double valorHora,String espacioAsignado){
++        super(placa, nombreConductor, idConductor, horaIngreso,valorHora, espacioAsignado);
+         this.cilindraje = cilindraje;
++        this.valorHora = valorHora;
++    }
++    @Override
++    public double calcularTarifa() {
++        double valorTarifa = 0;
++        return valorTarifa = valorHora * (getHoraIngreso()-getHoraSalida());
+     }
+ 
+     public int getCilindraje() {
+@@ -17,4 +23,7 @@
+     public void setCilindraje(int cilindraje) {
+         this.cilindraje = cilindraje;
+     }
++
++    public double getValorHora(){return valorHora;}
++    public void setValorHora(double valorHora){this.valorHora = valorHora;}
+ }
+Index: Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\nimport java.util.List;\r\n\r\npublic class Parqueadero {\r\n\r\n    private String nombre;\r\n    private String nit;\r\n    private int espaciosTotales;\r\n\r\n\r\n    private List<Vehiculo> listVehiculo;\r\n    private List<Espacio> listEspacio;\r\n    private List<Persona> listPersona;\r\n    private List<Registro> listRegistro;\r\n\r\n    public Parqueadero(String nombre, String nit, int espaciosTotales) {\r\n        this.nombre = nombre;\r\n        this.nit = nit;\r\n        this.espaciosTotales = espaciosTotales;\r\n    }\r\n\r\n    //----------------------------------------------CRUD OPERARIO-----------------------------------------\r\n\r\n    /**\r\n     * Metodo para buscar si un empleado ya existe en el programa\r\n     *\r\n     * @param id del operario\r\n     * @return\r\n     */\r\n    public boolean buscarEmpleado(int id) {\r\n        boolean existe = false;\r\n        for (Persona persona : listPersona) {\r\n            if (persona.getId() == id) {\r\n                existe = true;\r\n\r\n            }\r\n        }\r\n        return existe;\r\n    }\r\n\r\n    /**\r\n     * Metodo para crear un operario en el programa\r\n     *\r\n     * @param nombre del operario\r\n     * @param id     del operario\r\n     * @return mensaje indicando la operación\r\n     */\r\n    public String crearOperario(String nombre, int id, String telefono, String email, int horasTrabajadas) {\r\n        String respuesta = \"\";\r\n        if (buscarEmpleado(id)) {\r\n            respuesta = \"El empleado con id \" + id + \" ya existe en el sistema.\";\r\n        } else {\r\n            Operario nuevoOperario = new Operario(nombre, id, telefono, email, horasTrabajadas);\r\n            listPersona.add(nuevoOperario);\r\n            respuesta = \"El operario \" + nuevoOperario.getNombre() + \" se registró exitosamente.\";\r\n        }\r\n        return respuesta;\r\n    }\r\n\r\n    /**\r\n     * Metodo para saber si un espacio esta disponible\r\n     *\r\n     * @param estadoEspacio del espacio\r\n     * @return un booleano con el estado en falso o verdadero\r\n     */\r\n    public boolean encontrarEspacioDisponible(EstadoEspacio estadoEspacio) {\r\n        boolean encontrado = false;\r\n        for (Espacio e : listEspacio) {\r\n            if (e.getEstadoEspacio() == EstadoEspacio.DISPONIBLE) {\r\n                encontrado = true;\r\n\r\n            }\r\n        }\r\n        return encontrado;\r\n    }\r\n\r\n    /**\r\n     * Metodo para consultar cuantos espacios hay disponibles\r\n     * @return mensaje con el total de espacios ocupados\r\n     */\r\n\r\n    public String consultarEspaciosDisponibles() {\r\n        int total = listEspacio.size();\r\n        int ocupados = 0;\r\n        int disponibles = 0;\r\n\r\n        for (Espacio esp : listEspacio) {\r\n            if (esp.getEstadoEspacio() == EstadoEspacio.OCUPADO) {\r\n                ocupados++;\r\n            }\r\n        }\r\n\r\n        disponibles = total - ocupados;\r\n        return\r\n                \"El Total de espacios es: \" + total + \"Los ocupados son: \" + ocupados + \"y los espacios disponibles: \" + disponibles;\r\n    }\r\n\r\n\r\n    /**\r\n     * Metodo para registrar el ingreso de los vehiculos al parqueadero\r\n\r\n     * @param placa           del vehiculo\r\n     * @param nombreConductor del vehiculo\r\n     * @param idConductor     del vehiculo\r\n     * @param horaIngreso     del vehiculo\r\n     * @param espacioAsignado del vehiculo\r\n     * @return mensaje indicando operación\r\n     */\r\n    public String registrarIngresoVehiculos(String placa, String nombreConductor, int idConductor,\r\n                                            double horaIngreso, String espacioAsignado) {\r\n        String respuesta = \"\";\r\n        if (encontrarEspacioDisponible(EstadoEspacio.DISPONIBLE)) {\r\n            respuesta = \"El vehiculo no puede ingresar ya que el espacio esta ocupado por otro vehiculo\";\r\n        } else {\r\n            //Falta como agregar el tipo de vehiculo\r\n            Vehiculo newVehiculo = new Vehiculo(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);\r\n            respuesta = \"El vehiculo ha ingresado exitosamente \";\r\n        }\r\n        return respuesta;\r\n    }\r\n\r\n    /**\r\n     * Metodo para consultar cuantos vehiculos hay dentro del parqueadero\r\n     * @return mensaje indicando operación\r\n     */\r\n\r\n    public String vehiculosDentroParqueadero(String placa) {\r\n        String respuesta = \"\";\r\n        for (Vehiculo vehiculo : listVehiculo) {\r\n            if (vehiculo.getPlaca().equals(placa)) {\r\n            }\r\n            if (vehiculo.getEstadoVehiculo() == EstadoVehiculo.ADENTRO) {\r\n                respuesta = \"Placa: \" + vehiculo.getPlaca() + \"Conductor: \" + vehiculo.getNombreConductor() + \"Hora ingreso: \"\r\n                        + vehiculo.getHoraIngreso() + \"Espacio asignado \" + vehiculo.getEspacioAsignado();\r\n\r\n            } else {\r\n                respuesta = \"El vehiculo no esta estacionado en ningun espacio\";\r\n            }\r\n\r\n        }\r\n        return respuesta;\r\n    }\r\n\r\n\r\n    public String getNombre() {\r\n        return nombre;\r\n    }\r\n\r\n    public void setNombre(String nombre) {\r\n        this.nombre = nombre;\r\n    }\r\n\r\n    public String getNit() {\r\n        return nit;\r\n    }\r\n\r\n    public void setNit(String nit) {\r\n        this.nit = nit;\r\n    }\r\n\r\n    public int getEspaciosTotales() {\r\n        return espaciosTotales;\r\n    }\r\n\r\n    public void setEspaciosTotales(int espaciosTotales) {\r\n        this.espaciosTotales = espaciosTotales;\r\n    }\r\n\r\n    public List<Vehiculo> getListVehiculo() {\r\n        return listVehiculo;\r\n    }\r\n\r\n    public void setListVehiculo(List<Vehiculo> listVehiculo) {\r\n        this.listVehiculo = listVehiculo;\r\n    }\r\n\r\n    public List<Espacio> getListEspacio() {\r\n        return listEspacio;\r\n    }\r\n\r\n    public void setListEspacio(List<Espacio> listEspacio) {\r\n        this.listEspacio = listEspacio;\r\n    }\r\n\r\n    public List<Persona> getListEmpleado() {\r\n        return listPersona;\r\n    }\r\n\r\n    public void setListEmpleado(List<Persona> listPersona) {\r\n        this.listPersona = listPersona;\r\n    }\r\n\r\n    public List<Registro> getListRegistro() {\r\n        return listRegistro;\r\n    }\r\n\r\n    public void setListRegistro(List<Registro> listRegistro) {\r\n        this.listRegistro = listRegistro;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Parqueadero{\" + \"nombre='\" + nombre + \"', nit='\" + nit + \"'}\";\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java b/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java	(date 1779410213966)
+@@ -8,7 +8,6 @@
+     private String nit;
+     private int espaciosTotales;
+ 
+-
+     private List<Vehiculo> listVehiculo;
+     private List<Espacio> listEspacio;
+     private List<Persona> listPersona;
+@@ -26,30 +25,79 @@
+      * Metodo para buscar si un empleado ya existe en el programa
+      *
+      * @param id del operario
+-     * @return
++     * @return variable true o false que indique la existencía
+      */
+     public boolean buscarEmpleado(int id) {
+         boolean existe = false;
+         for (Persona persona : listPersona) {
+             if (persona.getId() == id) {
+                 existe = true;
++                break;
+ 
+             }
+         }
+         return existe;
+     }
+ 
++    /**
++     * Metodo para buscar si un vehiculo ya existe
++     *
++     * @param placa del vehiculo
++     * @return variable true o false que indique la existencía
++     */
++
++    public boolean buscarVehiculo(String placa) {
++
++        boolean existe = false;
++
++        for (Vehiculo vehiculo : listVehiculo) {
++
++            if (vehiculo.getPlaca().equals(placa)) {
++
++                existe = true;
++                break;
++            }
++        }
++
++        return existe;
++    }
++
++    /**
++     * Metodo para buscar si un espacio existe
++     *
++     * @param codigo del espacio
++     * @return variable true o false que indique la existencía
++     */
++
++    public boolean buscarEspacio(int codigo) {
++
++        boolean existe = false;
++
++        for (Espacio espacio : listEspacio) {
++
++            if (espacio.getCodigo() == (codigo)) {
++
++                existe = true;
++                break;
++            }
++        }
++
++        return existe;
++    }
++
+     /**
+      * Metodo para crear un operario en el programa
+      *
+-     * @param nombre del operario
+-     * @param id     del operario
++     * @param nombre          del operario
++     * @param id              del operario
++     * @param email           del operario
++     * @param horasTrabajadas del operario
+      * @return mensaje indicando la operación
+      */
+     public String crearOperario(String nombre, int id, String telefono, String email, int horasTrabajadas) {
+         String respuesta = "";
+         if (buscarEmpleado(id)) {
+-            respuesta = "El empleado con id " + id + " ya existe en el sistema.";
++            respuesta = "El operario con id " + id + " ya existe en el sistema.";
+         } else {
+             Operario nuevoOperario = new Operario(nombre, id, telefono, email, horasTrabajadas);
+             listPersona.add(nuevoOperario);
+@@ -69,7 +117,7 @@
+         for (Espacio e : listEspacio) {
+             if (e.getEstadoEspacio() == EstadoEspacio.DISPONIBLE) {
+                 encontrado = true;
+-
++                break;
+             }
+         }
+         return encontrado;
+@@ -77,6 +125,7 @@
+ 
+     /**
+      * Metodo para consultar cuantos espacios hay disponibles
++     *
+      * @return mensaje con el total de espacios ocupados
+      */
+ 
+@@ -92,47 +141,152 @@
+         }
+ 
+         disponibles = total - ocupados;
+-        return
+-                "El Total de espacios es: " + total + "Los ocupados son: " + ocupados + "y los espacios disponibles: " + disponibles;
++        return "El Total de espacios es: " + total + "Los ocupados son: " + ocupados + "y los espacios disponibles: " + disponibles;
+     }
+ 
+ 
+     /**
+-     * Metodo para registrar el ingreso de los vehiculos al parqueadero
+-
+-     * @param placa           del vehiculo
+-     * @param nombreConductor del vehiculo
+-     * @param idConductor     del vehiculo
+-     * @param horaIngreso     del vehiculo
+-     * @param espacioAsignado del vehiculo
++     * Metodo para registrar el ingreso de las motos al parqueadero
++     *
++     * @param placa           de la Moto
++     * @param nombreConductor de la Moto
++     * @param idConductor     de la Moto
++     * @param horaIngreso     de la Moto
++     * @param horaSalida      de la Moto
++     * @param cilindraje      de la Moto
++     * @param valorHora       de la Moto
++     * @param espacioAsignado de la Moto
+      * @return mensaje indicando operación
+      */
+-    public String registrarIngresoVehiculos(String placa, String nombreConductor, int idConductor,
+-                                            double horaIngreso, String espacioAsignado) {
++    public String registrarIngresoMoto(String placa, String nombreConductor, int idConductor, double horaIngreso, double horaSalida,
++                                       int cilindraje, double valorHora, String espacioAsignado) {
++
+         String respuesta = "";
+         if (encontrarEspacioDisponible(EstadoEspacio.DISPONIBLE)) {
+             respuesta = "El vehiculo no puede ingresar ya que el espacio esta ocupado por otro vehiculo";
+         } else {
+-            //Falta como agregar el tipo de vehiculo
+-            Vehiculo newVehiculo = new Vehiculo(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);
+-            respuesta = "El vehiculo ha ingresado exitosamente ";
++
++            Moto nuevaMoto = new Moto(placa, nombreConductor, idConductor, horaIngreso, horaSalida, cilindraje, valorHora, espacioAsignado);
++            listVehiculo.add(nuevaMoto);
++            respuesta = "La moto ha ingresado exitosamente ";
++        }
++        return respuesta;
++    }
++
++    /**
++     * Metodo para registrar el ingreso de los Carros al parqueadero
++     *
++     * @param placa           del Carro
++     * @param nombreConductor del Carro
++     * @param idConductor     del Carro
++     * @param horaIngreso     del Carro
++     * @param horaSalida      del Carro
++     * @param numeroPuertas   del Carro
++     * @param valorHora       del Carro
++     * @param espacioAsignado del Carro
++     * @return mensaje indicando operación
++     */
++
++    public String registrarIngresoCarro(String placa, String nombreConductor, int idConductor, double horaIngreso, double horaSalida
++            , int numeroPuertas, double valorHora, String espacioAsignado) {
++
++        String respuesta = "";
++        if (buscarVehiculo(placa)) {
++            respuesta = "La placa ya existe en el sistema";
++
++        } else {
++
++            Carro nuevoCarro = new Carro(placa, nombreConductor, idConductor, horaIngreso, horaSalida, numeroPuertas, valorHora, espacioAsignado);
++
++            listVehiculo.add(nuevoCarro);
++
++            respuesta = "El carro ingreso exitosamente";
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para registrar el ingreso de las Bicicletas al parqueadero
++     *
++     * @param placa           de la Bicicleta
++     * @param nombreConductor de la Bicicleta
++     * @param idConductor     de la Bicicleta
++     * @param horaIngreso     de la Bicicleta
++     * @param horaSalida      de la Bicicleta
++     * @param marca           de la Bicicleta
++     * @param valorHora       de la Bicicleta
++     * @param espacioAsignado de la Bicicleta
++     * @return mensaje indicando operación
++     */
++    public String registrarIngresoBicicleta(String placa, String nombreConductor, int idConductor, double horaIngreso, double horaSalida, String marca,
++                                            double valorHora, String espacioAsignado) {
++
++        String respuesta = "";
++
++        if (buscarVehiculo(placa)) {
++
++            respuesta = "La placa ya existe en el sistema";
++
++        } else {
++
++            Bicicleta nuevaBicicleta = new Bicicleta(placa, nombreConductor, idConductor, horaIngreso, horaSalida, marca, valorHora, espacioAsignado);
++
++            listVehiculo.add(nuevaBicicleta);
++
++            respuesta = "La bicicleta ingreso exitosamente";
+         }
++
+         return respuesta;
+     }
+ 
++    /**
++     * Metodo para registrar salida de vehiculos
++     *
++     * @param placa del vehiculo
++     * @return mensaje indicando operación
++     */
++
++    public String registrarSalidaVehiculo(String placa) {
++
++        String respuesta = "";
++
++        if (buscarVehiculo(placa)) {
++
++            for (Vehiculo vehiculo : listVehiculo) {
++
++                if (vehiculo.getPlaca().equals(placa)) {
++
++                    vehiculo.setEstadoVehiculo(EstadoVehiculo.AFUERA);
++
++                    respuesta = "El vehiculo salió exitosamente";
++                }
++            }
++
++        } else {
++
++            respuesta = "El vehiculo no existe";
++        }
++
++        return respuesta;
++    }
++
++
+     /**
+      * Metodo para consultar cuantos vehiculos hay dentro del parqueadero
++     *
++     * @param placa del vehiculo
+      * @return mensaje indicando operación
+      */
+ 
+     public String vehiculosDentroParqueadero(String placa) {
++
+         String respuesta = "";
+         for (Vehiculo vehiculo : listVehiculo) {
+             if (vehiculo.getPlaca().equals(placa)) {
+             }
+             if (vehiculo.getEstadoVehiculo() == EstadoVehiculo.ADENTRO) {
+-                respuesta = "Placa: " + vehiculo.getPlaca() + "Conductor: " + vehiculo.getNombreConductor() + "Hora ingreso: "
+-                        + vehiculo.getHoraIngreso() + "Espacio asignado " + vehiculo.getEspacioAsignado();
++                respuesta = "Placa: " + vehiculo.getPlaca() + "Conductor: " + vehiculo.getNombreConductor() + "Hora ingreso: " + vehiculo.getHoraIngreso() + "Espacio asignado " + vehiculo.getEspacioAsignado();
+ 
+             } else {
+                 respuesta = "El vehiculo no esta estacionado en ningun espacio";
+@@ -142,6 +296,376 @@
+         return respuesta;
+     }
+ 
++    /**
++     * Metodo para consultar todos los vehiculos dentro del parqueadero
++     *
++     * @return mensaje indicando operación
++     */
++
++    public String consultarVehiculosDentro() {
++
++        String respuesta = "";
++
++        for (Vehiculo vehiculo : listVehiculo) {
++
++            if (vehiculo.getEstadoVehiculo() == EstadoVehiculo.ADENTRO) {
++
++                respuesta += "Placa: " + vehiculo.getPlaca() + "Conductor: " + vehiculo.getNombreConductor() + "Hora ingreso: " + vehiculo.getHoraIngreso() + "Espacio asignado: " + vehiculo.getEspacioAsignado();
++                break;
++            }
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para consultar espacios ocupados
++     *
++     * @return mensaje indicando operación
++     */
++
++    public String consultarEspaciosOcupados() {
++
++        String respuesta = "";
++
++        for (Espacio espacio : listEspacio) {
++
++            if (espacio.getEstadoEspacio().equals(EstadoEspacio.OCUPADO)) {
++
++                respuesta = "Codigo: " + espacio.getCodigo() + "Tipo espacio: " + espacio.getTipoEspacio() + "Estado: " + espacio.getEstadoEspacio();
++            }
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para consultar total vehiculos ingresados
++     *Lo borre porque tengo que hacer uno de cada uno, osea uno de carros otro de motos y otro de bicicletas
++     * @return total vehiculos
++     */
++
++
++    /**
++     * Metodo para obtener los ingresos del carro
++     *
++     * @return valor de los ingresos del Carro
++     */
++    public double obtenerValorIngresoCarro() {
++        double valorCarro = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Carro) {
++                Carro carro = (Carro) vehiculo;
++                valorCarro = carro.calcularTarifa();
++            }
++
++        }
++        return valorCarro;
++    }
++
++    /**
++     * Metodo para obtener los ingresos de la moto
++     *
++     * @return valor de los ingresos de la moto
++     */
++    public double obtenerValorIngresoMoto() {
++        double valorMoto = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Moto) {
++                Moto moto = (Moto) vehiculo;
++                valorMoto = moto.calcularTarifa();
++            }
++
++        }
++        return valorMoto;
++    }
++
++    /**
++     * Metodo para obtener los ingresos de la Bicicleta
++     *
++     * @return valor de los ingresos de la bicicleta
++     */
++    public double obtenerValorIngresoBicicleta() {
++        double valorBici = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Bicicleta) {
++                Bicicleta bici = (Bicicleta) vehiculo;
++                valorBici = bici.calcularTarifa();
++            }
++
++        }
++        return valorBici;
++    }
++
++    /**
++     * Metodo para obtener los ingresos Totales generados en el parqueadero
++     *
++     * @return valor de los ingresos totales del parqueadero
++     */
++    public double obtenerIngresosTotales() {
++
++        double valorTotal = 0;
++
++        valorTotal = (obtenerValorIngresoBicicleta() + obtenerValorIngresoCarro() + obtenerValorIngresoMoto());
++        return valorTotal;
++    }
++
++
++    /**
++     * Metodo para obtener el tiempo del carro
++     *
++     * @return valor con el tiempo del carro en el parqueadero
++     */
++    public double tiempoCarro() {
++        double tiempoCarro = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Carro) {
++                Carro carro = (Carro) vehiculo;
++                tiempoCarro = (carro.getHoraIngreso() - carro.getHoraSalida());
++            }
++
++        }
++        return tiempoCarro;
++    }
++
++    /**
++     * Metodo para obtener el tiempo de la moto
++     *
++     * @return valor con el tiempo de la moto en el parqueadero
++     */
++    public double tiempoMoto() {
++        double tiempoMoto = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Moto) {
++                Moto moto = (Moto) vehiculo;
++                tiempoMoto = (moto.getHoraIngreso() - moto.getHoraSalida());
++            }
++
++        }
++        return tiempoMoto;
++    }
++
++    /**
++     * Metodo para calcular tiempo de la bicicleta
++     *
++     * @return valor con el tiempo de la bici en el parqueadero
++     */
++    public double tiempoBicicleta() {
++        double tiempoBici = 0;
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Bicicleta) {
++                Bicicleta bici = (Bicicleta) vehiculo;
++                tiempoBici = (bici.getHoraIngreso() - bici.getHoraSalida());
++            }
++
++        }
++        return tiempoBici;
++    }
++
++    /**
++     * Metodo para calcular el tiempo promedio de permanencia de los vehiculos en el parqueadero
++     */
++    public double calcularPromedioPermanencia() {
++        double promedio = 0;
++
++        promedio = (tiempoBicicleta() + tiempoMoto() + tiempoCarro());
++
++        return promedio;
++    }
++
++    /**
++     * Metodo para consultar el total de los vehiculos ingresados en el día
++     * me falta la salida
++     */
++
++
++    //----------------------------------------------CRUD ADMINISTRADOR-----------------------------------------
++
++    /**
++     * Metodo para crear espacios
++     *
++     * @param codigo           del espacio
++     * @param VehiculoAsignado del espacio
++     * @return mensaje indicando operación
++     */
++
++    public String crearEspacio(int codigo, String VehiculoAsignado) {
++
++        String respuesta = "";
++
++        if (buscarEspacio(codigo)) {
++
++            respuesta = "El espacio ya existe";
++
++        } else {
++
++            Espacio nuevoEspacio = new Espacio(codigo, VehiculoAsignado);
++
++            listEspacio.add(nuevoEspacio);
++
++            respuesta = "El espacio fue creado exitosamente";
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para modificar estado de un espacio
++     *
++     * @param codigo      del espacio
++     * @param nuevoEstado del espacio
++     * @return mensaje indicando operación
++     */
++
++    public String modificarEstadoEspacio(int codigo, EstadoEspacio nuevoEstado) {
++
++        String respuesta = "";
++
++        if (buscarEspacio(codigo)) {
++
++            for (Espacio espacio : listEspacio) {
++
++                if (espacio.getCodigo() == (codigo)) {
++
++                    espacio.setEstadoEspacio(nuevoEstado);
++
++                    respuesta = "Estado modificado exitosamente";
++                }
++            }
++
++        } else {
++
++            respuesta = "El espacio no existe";
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para deshabilitar espacio
++     *
++     * @param codigo del espacio
++     * @return mensaje indicando operación
++     */
++
++    public String deshabilitarEspacio(int codigo) {
++
++        String respuesta = "";
++
++        if (buscarEspacio(codigo)) {
++
++            for (Espacio espacio : listEspacio) {
++
++                if (espacio.getCodigo() == (codigo)) {
++
++                    espacio.setEstadoEspacio(EstadoEspacio.MANTENIMIENTO);
++
++                    respuesta = "Espacio deshabilitado exitosamente";
++                }
++            }
++
++        } else {
++
++            respuesta = "El espacio no existe";
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para habilitar espacio
++     *
++     * @param codigo del espacio
++     * @return mensaje indicando operación
++     */
++
++    public String habilitarEspacio(int codigo) {
++
++        String respuesta = "";
++
++        if (buscarEspacio(codigo)) {
++
++            for (Espacio espacio : listEspacio) {
++
++                if (espacio.getCodigo() == (codigo)) {
++
++                    espacio.setEstadoEspacio(EstadoEspacio.DISPONIBLE);
++
++                    respuesta = "Espacio habilitado exitosamente";
++                }
++            }
++
++        } else {
++
++            respuesta = "El espacio no existe";
++        }
++
++        return respuesta;
++    }
++
++    /**
++     * Metodo para modificar valorHora de carro
++     *
++     * @return mensaje indicativo de la operación
++     */
++    public String asignarValorHoraCarro() {
++        String respuesta = "";
++
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Carro) {
++                Carro carro = (Carro) vehiculo;
++                carro.setValorHora(2000);
++                respuesta = "El valor de la hora para carro es " + carro.getValorHora();
++            }
++        }
++        return respuesta;
++
++    }
++
++    /**
++     * Metodo para modificar valorHora de moto
++     *
++     * @return mensaje indicativo de la operación
++     */
++    public String asignarValorHoraMoto() {
++        String respuesta = "";
++
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Moto) {
++                Moto moto = (Moto) vehiculo;
++                moto.setValorHora(1500);
++                respuesta = "El valor de la hora para moto es " + moto.getValorHora();
++            }
++        }
++        return respuesta;
++
++    }
++
++    /**
++     * Metodo para modificar valorHora de bicicleta
++     *
++     * @return mensaje indicativo de la operación
++     */
++    public String asignarValorHoraBici() {
++        String respuesta = "";
++
++        for (Vehiculo vehiculo : listVehiculo) {
++            if (vehiculo instanceof Bicicleta) {
++                Bicicleta bici = (Bicicleta) vehiculo;
++                bici.setValorHora(1500);
++                respuesta = "El valor de la hora para bici es " + bici.getValorHora();
++            }
++        }
++        return respuesta;
++
++    }
++
++    /**
++     * Metodo para gestionar usuarios que tienen acceso frecuente al parqueadero
++     * No tengo idea de como hacerlo la verdad
++     *
++     * @return
++     */
+ 
+     public String getNombre() {
+         return nombre;
+Index: Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\npublic interface TarifaEspacio {\r\n    public double calcularTarifa();\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java b/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java	(date 1779406744939)
+@@ -1,6 +1,7 @@
+ package uniquindio.edu.co;
+ 
+ public interface TarifaEspacio {
++
+     public double calcularTarifa();
+ 
+ }
+Index: Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\npublic class Bicicleta extends Vehiculo{\r\n    private String marca;\r\n\r\n    public Bicicleta (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,\r\n    String marca){\r\n        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);\r\n        this.marca = marca;\r\n    }\r\n\r\n\r\npublic String getMarca (){return marca;}\r\n    public void setMarca (String marca){this.marca  = marca;}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java b/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java	(date 1779406744994)
+@@ -2,14 +2,24 @@
+ 
+ public class Bicicleta extends Vehiculo{
+     private String marca;
++    private double valorHora;
+ 
+-    public Bicicleta (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,
+-    String marca){
+-        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);
++    public Bicicleta (String placa, String nombreConductor, int idConductor, double horaIngreso,double horaSalida,
++    String marca,double valorHora,String espacioAsignado){
++        super(placa, nombreConductor, idConductor, horaIngreso,horaSalida, espacioAsignado);
+         this.marca = marca;
++        this.valorHora = valorHora;
++    }
++    @Override
++    public double calcularTarifa() {
++        double valorTarifa = 0;
++        return valorTarifa = valorHora * (getHoraIngreso()-getHoraSalida());
+     }
+ 
+ 
+ public String getMarca (){return marca;}
+     public void setMarca (String marca){this.marca  = marca;}
++
++    public double getValorHora() {return valorHora;}
++    public void setValorHora(double valorHora){this.valorHora = valorHora;}
+ }
+Index: Parqueadero/src/main/java/uniquindio.edu.co/Carro.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\npublic class Carro extends Vehiculo{\r\n    public int numeroPuertas;\r\n\r\n    public Carro (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,\r\n                      int numeroPuertas){\r\n        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);\r\n        this.numeroPuertas = numeroPuertas;\r\n}\r\n\r\n    public int getNumeroPuertas() {\r\n        return numeroPuertas;\r\n    }\r\n\r\n    public void setNumeroPuertas(int numeroPuertas) {\r\n        this.numeroPuertas = numeroPuertas;\r\n    }\r\n\r\n    }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java b/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java	(date 1779406744977)
+@@ -1,13 +1,21 @@
+ package uniquindio.edu.co;
+ 
+ public class Carro extends Vehiculo{
+-    public int numeroPuertas;
++    private int numeroPuertas;
++    private double valorHora;
+ 
+-    public Carro (String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado,
+-                      int numeroPuertas){
+-        super(placa, nombreConductor, idConductor, horaIngreso, espacioAsignado);
++    public Carro (String placa, String nombreConductor, int idConductor, double horaIngreso,double horaSalida,
++                      int numeroPuertas, double valorHora, String espacioAsignado){
++        super(placa, nombreConductor, idConductor, horaIngreso,horaSalida,  espacioAsignado);
+         this.numeroPuertas = numeroPuertas;
++        this.valorHora = valorHora;
+ }
++
++    @Override
++    public double calcularTarifa() {
++        double valorTarifa = 0;
++       return valorTarifa = valorHora * (getHoraIngreso()-getHoraSalida());
++    }
+ 
+     public int getNumeroPuertas() {
+         return numeroPuertas;
+@@ -17,4 +25,8 @@
+         this.numeroPuertas = numeroPuertas;
+     }
+ 
++    public double getValorHora(){ return valorHora;}
++
++    public void setValorHora(double valorHora){this.valorHora = valorHora;}
++
+     }
+Index: Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniquindio.edu.co;\r\n\r\nimport java.util.List;\r\n\r\npublic class Vehiculo implements TarifaEspacio {\r\n\r\n    // Atributos\r\n    private String placa;\r\n    private String nombreConductor;\r\n    private int idConductor;\r\n    private double horaIngreso;\r\n    private String espacioAsignado;\r\n\r\n    // Relaciones\r\n    private Parqueadero theParqueadero;\r\n    private EstadoVehiculo estadoVehiculo;\r\n    private Espacio theEspacioAsignado;\r\n    private Usuario theUsuario;\r\n    private List<Registro> listRegistro;\r\n\r\n    public Vehiculo(String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado) {\r\n        this.placa = placa;\r\n        this.nombreConductor = nombreConductor;\r\n        this.idConductor = idConductor;\r\n        this.horaIngreso = horaIngreso;\r\n        this.espacioAsignado = espacioAsignado;\r\n    }\r\n\r\n\r\n\r\n    // Getters y Setters\r\n    public String getPlaca() {\r\n        return placa;\r\n    }\r\n\r\n    public void setPlaca(String placa) {\r\n        this.placa = placa;\r\n    }\r\n\r\n    public String getNombreConductor() {\r\n        return nombreConductor;\r\n    }\r\n\r\n    public void setNombreConductor(String nombreConductor) {\r\n        this.nombreConductor = nombreConductor;\r\n    }\r\n\r\n    public int getIdConductor() {\r\n        return idConductor;\r\n    }\r\n\r\n    public void setIdConductor(int idConductor) {\r\n        this.idConductor = idConductor;\r\n    }\r\n\r\n    public double getHoraIngreso() {\r\n        return horaIngreso;\r\n    }\r\n\r\n    public void setHoraIngreso(double horaIngreso) {\r\n        this.horaIngreso = horaIngreso;\r\n    }\r\n\r\n    public String getEspacioAsignado (){ return espacioAsignado;}\r\n\r\n    public void setEspacioAsignado (String espacioAsignado){this.espacioAsignado = espacioAsignado;}\r\n\r\n    public Parqueadero getTheParqueadero() {\r\n        return theParqueadero;\r\n    }\r\n\r\n    public void setTheParqueadero(Parqueadero theParqueadero) {\r\n        this.theParqueadero = theParqueadero;\r\n    }\r\n\r\n    public EstadoVehiculo getEstadoVehiculo() {\r\n        return estadoVehiculo;\r\n    }\r\n\r\n    public void setEstadoVehiculo(EstadoVehiculo estadoVehiculo) {\r\n        this.estadoVehiculo = estadoVehiculo;\r\n    }\r\n\r\n    public Espacio getTheEspacioAsignado() {\r\n        return theEspacioAsignado;\r\n    }\r\n\r\n    public void setTheEspacioAsignado(Espacio theEspacioAsignado) {\r\n        this.theEspacioAsignado = theEspacioAsignado;\r\n    }\r\n\r\n    public Usuario getTheUsuario() {\r\n        return theUsuario;\r\n    }\r\n\r\n    public void setTheUsuario(Usuario theUsuario) {\r\n        this.theUsuario = theUsuario;\r\n    }\r\n\r\n    public List<Registro> getListRegistro() {\r\n        return listRegistro;\r\n    }\r\n\r\n    public void setListRegistro(List<Registro> listRegistro) {\r\n        this.listRegistro = listRegistro;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Vehiculo{placa='\" + placa + \"'}\";\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java b/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java
+--- a/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java	(date 1779406744922)
+@@ -9,6 +9,7 @@
+     private String nombreConductor;
+     private int idConductor;
+     private double horaIngreso;
++    private double horaSalida;
+     private String espacioAsignado;
+ 
+     // Relaciones
+@@ -18,14 +19,17 @@
+     private Usuario theUsuario;
+     private List<Registro> listRegistro;
+ 
+-    public Vehiculo(String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado) {
++    public Vehiculo(String placa, String nombreConductor, int idConductor, double horaIngreso,double horaSalida, String espacioAsignado) {
+         this.placa = placa;
+         this.nombreConductor = nombreConductor;
+         this.idConductor = idConductor;
+         this.horaIngreso = horaIngreso;
++        this.horaSalida = horaSalida;
+         this.espacioAsignado = espacioAsignado;
+     }
+-
++public double calcularTarifa (){
++        return 0;
++}
+ 
+ 
+     // Getters y Setters
+@@ -57,10 +61,17 @@
+         return horaIngreso;
+     }
+ 
+-    public void setHoraIngreso(double horaIngreso) {
+-        this.horaIngreso = horaIngreso;
++    public void setHoraIngreso(double horaSalida) {
++        this.horaSalida = horaSalida;
++    }
++
++    public double getHoraSalida() {
++        return horaIngreso;
+     }
+ 
++    public void setHoraSalida(double horaSalida) {
++        this.horaSalida = horaSalida;
++    }
+     public String getEspacioAsignado (){ return espacioAsignado;}
+ 
+     public void setEspacioAsignado (String espacioAsignado){this.espacioAsignado = espacioAsignado;}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1c495bb6-97a4-4236-94a5-6d6652ff3840\" name=\"Changes\" comment=\"Creacion de algunos metodos en la clase parqueadero\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Agenda/pom.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"Interface\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Estebaboso&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/santilopez77/REPOSITORIO-2026-SANTI-.git&quot;,\r\n    &quot;accountId&quot;: &quot;3b59085a-be79-4127-8480-4338328a0a22&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3DeajV22vnRlUH72rZ32JCFs4vZ\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"dev__JuanEsteban\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\juang\\IdeaProjects\\REPOSITORIO-2026-SANTI-\\.idea\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1c495bb6-97a4-4236-94a5-6d6652ff3840\" name=\"Changes\" comment=\"\" />\r\n      <created>1778645124658</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1778645124658</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Creacion de algunos metodos en la clase parqueadero\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1778768835724</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1778768835725</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Creacion de algunos metodos en la clase parqueadero\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Creacion de algunos metodos en la clase parqueadero\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c5c8f6e2f9f475549fffa021eefb1ff9ac330280)
++++ b/.idea/workspace.xml	(date 1779407504577)
+@@ -5,9 +5,10 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="1c495bb6-97a4-4236-94a5-6d6652ff3840" name="Changes" comment="Creacion de algunos metodos en la clase parqueadero">
+-      <change afterPath="$PROJECT_DIR$/.idea/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Agenda/pom.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Bicicleta.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Carro.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Moto.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Parqueadero.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/TarifaEspacio.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parqueadero/src/main/java/uniquindio.edu.co/Vehiculo.java" afterDir="false" />
+@@ -57,16 +58,16 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "dev__JuanEsteban",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "kotlin-language-version-configured": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="C:\Users\juang\IdeaProjects\REPOSITORIO-2026-SANTI-\.idea" />
+@@ -97,6 +98,17 @@
+     </task>
+     <option name="localTasksCounter" value="2" />
+     <servers />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Creacion de algunos metodos en la clase parqueadero" />

@@ -9,6 +9,7 @@ public class Vehiculo implements TarifaEspacio {
     private String nombreConductor;
     private int idConductor;
     private double horaIngreso;
+    private double horaSalida;
     private String espacioAsignado;
 
     // Relaciones
@@ -18,14 +19,17 @@ public class Vehiculo implements TarifaEspacio {
     private Usuario theUsuario;
     private List<Registro> listRegistro;
 
-    public Vehiculo(String placa, String nombreConductor, int idConductor, double horaIngreso, String espacioAsignado) {
+    public Vehiculo(String placa, String nombreConductor, int idConductor, double horaIngreso,double horaSalida, String espacioAsignado) {
         this.placa = placa;
         this.nombreConductor = nombreConductor;
         this.idConductor = idConductor;
         this.horaIngreso = horaIngreso;
+        this.horaSalida = horaSalida;
         this.espacioAsignado = espacioAsignado;
     }
-
+public double calcularTarifa (){
+        return 0;
+}
 
 
     // Getters y Setters
@@ -57,10 +61,17 @@ public class Vehiculo implements TarifaEspacio {
         return horaIngreso;
     }
 
-    public void setHoraIngreso(double horaIngreso) {
-        this.horaIngreso = horaIngreso;
+    public void setHoraIngreso(double horaSalida) {
+        this.horaSalida = horaSalida;
     }
 
+    public double getHoraSalida() {
+        return horaIngreso;
+    }
+
+    public void setHoraSalida(double horaSalida) {
+        this.horaSalida = horaSalida;
+    }
     public String getEspacioAsignado (){ return espacioAsignado;}
 
     public void setEspacioAsignado (String espacioAsignado){this.espacioAsignado = espacioAsignado;}
